@@ -1,0 +1,12 @@
+{% extends 'expenses/base.html' %}
+
+{% block title %}Add Expense{% endblock %}
+
+{% block content %}
+<h2>Add Expense</h2>
+<form method="post" action="{% url 'expenses:add_expense' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Expense</button>
+</form>
+{% endblock %}

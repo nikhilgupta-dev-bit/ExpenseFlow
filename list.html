@@ -1,0 +1,39 @@
+{% extends 'expenses/base.html' %}
+
+{% block title %}All Expenses{% endblock %}
+
+{% block content %}
+<h2 class="animate__animated animate__fadeInDown">All Expenses</h2>
+
+{% if expenses %}
+<table class="table table-bordered table-striped animate__animated animate__fadeInUp">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Amount (₹)</th>
+            <th>Date</th>
+            <th>Category</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for expense in expenses %}
+        <tr>
+            <td>{{ expense.title }}</td>
+            <td>{{ expense.amount }}</td>
+            <td>{{ expense.date }}</td>
+            <td>{{ expense.category }}</td>
+            <td>
+                <a href="{% url 'expenses:edit_expense' expense.pk %}" class="btn btn-sm btn-warning animate__animated animate__fadeIn">Edit</a>
+                <a href="{% url 'expenses:delete_expense' expense.pk %}" class="btn btn-sm btn-danger animate__animated animate__fadeIn">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="animate__animated animate__fadeIn">No expenses recorded yet.</p>
+{% endif %}
+
+<a href="{% url 'expenses:add_expense' %}" class="btn btn-primary mt-3 animate__animated animate__bounceIn">Add New Expense</a>
+{% endblock %}

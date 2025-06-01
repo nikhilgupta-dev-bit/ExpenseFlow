@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <!-- Animate.css CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body class="bg-secondary">
+    <header class="p-3 mb-4 border-bottom text-white" style="background-color:black;">
+        <div class="container d-flex justify-content-between align-items-center ">
+            <div class="d-flex align-items-center">
+                <img src="https://videos.openai.com/vg-assets/assets%2Ftask_01jwjw8887ez6ajsdd7gaws4xc%2F1748685375_img_2.webp?st=2025-05-31T08%3A23%3A46Z&se=2025-06-06T09%3A23%3A46Z&sks=b&skt=2025-05-31T08%3A23%3A46Z&ske=2025-06-06T09%3A23%3A46Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=8ebb0df1-a278-4e2e-9c20-f2d373479b3a&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=DJ3f2M7W21CZiMD4dvWXT8kl5VLEalr1Dqb02nFSZH8%3D&az=oaivgprodscus" alt="Expense Logo" style="height:40px; width:auto; margin-right:12px;">
+                <h1 class="h3 m-0">
+                    <a href="{% url 'expenses:list_expenses' %}" class="text-decoration-none text-white">Expense Tracker</a>
+                </h1>
+            </div>
+            <nav>
+                <a href="{% url 'expenses:list_expenses' %}" class="btn btn-link text-white">Home</a>
+                <a href="{% url 'expenses:add_expense' %}" class="btn btn-link text-white">Add Expense</a>
+                <a href="{% url 'expenses:summary' %}" class="btn btn-link text-white">Summary</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container animate__animated animate__fadeIn bg-secondary-custom py-4 rounded">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="text-center p-3 mt-4 text-content font-weight-bold" style="background-color: black; color: white;">
+        <p>Expense Tracker - Your personal expense management tool</p>
+        <p>&copy; ExpenseFlow</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const chartElement = document.getElementById('expenseChart');
+            if (chartElement) {
+                const ctx = chartElement.getContext('2d');
+                let labels = [];
+                let data = [];
+                try {
+                    labels = JSON.parse(chartElement.dataset.labels);
+                    data = JSON.parse(chartElement.dataset.amounts);
+                } catch (e) {
+                    // fallback for empty or invalid data
+                }
+                if (labels.length && data.length) {
+                    new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                data: data,
+                                backgroundColor: [
+                                    '#007bff', '#ffc107', '#dc3545', '#28a745',
+                                    '#6f42c1', '#fd7e14', '#20c997', '#17a2b8'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: false,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom'
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Expenses by Category'
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
+
