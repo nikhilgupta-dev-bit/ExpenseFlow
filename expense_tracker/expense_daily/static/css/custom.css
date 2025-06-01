@@ -1,0 +1,97 @@
+/* Custom CSS for Expense Tracker Application */
+
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1c3c5c;
+    color: #343a40;
+    margin: 0;
+    padding: 20px;
+}
+
+h2 {
+    color: #007bff;
+}
+
+/* Table Styles */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    background-color: #6c757d ; /* Bootstrap's bg-secondary */
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #818c97;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #8191a1;
+}
+
+/* Button Styles */
+.btn {
+    border-radius: 0.25rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Card Styles */
+.card {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+/* Alert Styles */
+.alert {
+    padding: 1rem;
+    border-radius: 0.25rem;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #0e1011;
+    padding: 1rem;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Animate.css delay utility (optional) */
+.animate__delay-1s {
+    animation-delay: 1s;
+}
+.animate__delay-2s {
+    animation-delay: 2s;
+}
+
+/* Custom class for grey background */
+.bg-secondary-custom {
+    background-color: #6c757d !important; /* Bootstrap's bg-secondary */
+}
